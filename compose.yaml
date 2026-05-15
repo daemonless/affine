@@ -1,0 +1,75 @@
+#
+# AFFiNE for FreeBSD (Daemonless)
+#
+# Usage:
+#   1. Copy example.env to .env and edit
+#   2. Run: podman-compose up -d
+#
+
+name: affine
+
+x-daemonless:
+  title: "AFFiNE"
+  icon: ":simple-affine:"
+  category: "Productivity"
+  description: "AFFiNE is an open-source, privacy-first, local-first knowledge management and collaboration tool."
+  upstream_url: "https://github.com/toeverything/AFFiNE"
+  web_url: "https://affine.pro/"
+  user: "bsd"
+  mlock: false
+  community: "Discord:https://discord.gg/Kb9tkhecZT"
+  type: stack
+  appjail: true
+
+  docs:
+    manual: true
+    env:
+      DB_DATA_LOCATION: "Path to store PostgreSQL data files"
+      AFFINE_DATA_LOCATION: "Path to store AFFiNE config and uploads"
+      DB_PASSWORD: "PostgreSQL password"
+      AFFINE_SERVER_HOST: "Public hostname for generated links (e.g. affine.example.com)"
+      AFFINE_SERVER_HTTPS: "Set to true if serving over HTTPS"
+      AFFINE_INDEXER_ENABLED: "Enable document indexer (default: false)"
+      DATABASE_URL: "PostgreSQL connection string"
+      REDIS_SERVER_HOST: "Redis hostname"
+    ports:
+      3010: "Web UI and API"
+
+services:
+  affine:
+    image: ghcr.io/daemonless/affine:latest
+    container_name: affine
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://affine:${DB_PASSWORD}@localhost:5432/affine
+      REDIS_SERVER_HOST: localhost
+      AFFINE_INDEXER_ENABLED: "false"
+    env_file:
+      - .env
+    volumes:
+      - ${AFFINE_DATA_LOCATION}:/config
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: ghcr.io/daemonless/redis:latest
+    container_name: affine_redis
+    network_mode: host
+    restart: unless-stopped
+
+  postgres:
+    image: ghcr.io/daemonless/postgres:latest
+    container_name: affine_postgres
+    network_mode: host
+    restart: unless-stopped
+    annotations:
+      org.freebsd.jail.allow.sysvipc: "true"
+    environment:
+      POSTGRES_USER: affine
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: affine
+      POSTGRES_EXTENSIONS: pgvector
+    volumes:
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data

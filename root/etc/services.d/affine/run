@@ -1,0 +1,8 @@
+#!/bin/sh
+# AFFiNE s6 service
+
+echo "[affine] Starting server..."
+
+cd /app
+exec /usr/local/bin/s6-setuidgid bsd \
+    /usr/local/bin/node ./dist/main.js

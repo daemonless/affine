@@ -1,0 +1,11 @@
+#!/bin/sh
+# AFFiNE data directory setup
+
+echo "[affine] Setting up config directory"
+
+# Create AFFiNE data directories (HOME=/config → ~/.affine/ resolves here)
+mkdir -p /config/.affine/config /config/.affine/storage
+
+chown -R bsd:bsd /config
+
+echo "[affine] Setup complete"

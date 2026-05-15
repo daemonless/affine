@@ -1,0 +1,128 @@
+# :simple-affine: AFFiNE
+
+[![Build Status](https://img.shields.io/github/actions/workflow/status/daemonless/affine/build.yaml?style=flat-square&label=Build&color=green)](https://github.com/daemonless/affine/actions)
+[![Last Commit](https://img.shields.io/github/last-commit/daemonless/affine?style=flat-square&label=Last+Commit&color=blue)](https://github.com/daemonless/affine/commits)
+
+AFFiNE is an open-source, privacy-first, local-first knowledge management and collaboration tool.
+
+| | |
+|---|---|
+| **Registry** | `ghcr.io/daemonless/affine` |
+| **Source** | [https://github.com/toeverything/AFFiNE](https://github.com/toeverything/AFFiNE) |
+| **Website** | [https://affine.pro/](https://affine.pro/) |
+
+## Version Tags
+
+| Tag | Description | Best For |
+| :--- | :--- | :--- |
+| `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
+
+## Prerequisites
+
+Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
+
+## Deploy
+
+**1.** Save as `.env`:
+
+```env { data-zip-bundle="affine-podman" data-zip-filename=".env" }
+DB_DATA_LOCATION=@CONTAINER_CONFIG_ROOT@/@AFFINE_CONFIG_PATH@/postgres
+AFFINE_DATA_LOCATION=@CONTAINER_CONFIG_ROOT@/@AFFINE_CONFIG_PATH@/data
+DB_PASSWORD=changeme
+AFFINE_SERVER_HOST=affine.example.com
+AFFINE_SERVER_HTTPS=false
+```
+
+**2.** Save as `compose.yaml`:
+
+```yaml { data-zip-bundle="affine-podman" data-zip-filename="compose.yaml" }
+name: affine
+
+services:
+  affine:
+    image: @REGISTRY@/affine:latest
+    container_name: affine
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://affine:${DB_PASSWORD}@localhost:5432/affine
+      REDIS_SERVER_HOST: localhost
+      AFFINE_SERVER_EXTERNAL_URL: http${AFFINE_SERVER_HTTPS:+s}://${AFFINE_SERVER_HOST}
+      AFFINE_INDEXER_ENABLED: "false"
+    volumes:
+      - ${AFFINE_DATA_LOCATION}:/config
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: @REGISTRY@/redis:latest
+    container_name: affine_redis
+    network_mode: host
+    restart: unless-stopped
+
+  postgres:
+    image: @REGISTRY@/postgres:latest
+    container_name: affine_postgres
+    network_mode: host
+    restart: unless-stopped
+    annotations:
+      org.freebsd.jail.allow.sysvipc: "true"
+    environment:
+      POSTGRES_USER: affine
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: affine
+      POSTGRES_EXTENSIONS: pgvector
+    volumes:
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+```
+
+**3.** Deploy:
+
+```bash
+mkdir -p @CONTAINER_CONFIG_ROOT@/@AFFINE_CONFIG_PATH@/postgres @CONTAINER_CONFIG_ROOT@/@AFFINE_CONFIG_PATH@/data
+chown -R @PUID@:@PGID@ @CONTAINER_CONFIG_ROOT@/@AFFINE_CONFIG_PATH@
+podman-compose up -d
+```
+
+Access AFFiNE at: **http://your-host:3010**
+
+<div class="placeholder-settings-panel"></div>
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `REDIS_SERVER_HOST` | Redis hostname (default: `localhost`) |
+| `AFFINE_SERVER_EXTERNAL_URL` | Public URL for generated links |
+| `AFFINE_INDEXER_ENABLED` | Enable document indexer (default: `false`) |
+
+## FreeBSD Notes
+
+### PostgreSQL Shared Memory
+
+PostgreSQL requires System V IPC. The compose file includes the required annotation:
+
+```yaml
+annotations:
+  org.freebsd.jail.allow.sysvipc: "true"
+```
+
+### Network Mode
+
+The stack uses `network_mode: host` — all services communicate via localhost. Only port `3010` needs to be exposed externally.
+
+## Management
+
+```bash
+# View logs
+podman-compose logs -f
+podman logs -f affine
+
+# Restart
+podman-compose restart
+
+# Update
+podman-compose pull && podman-compose up -d
+```

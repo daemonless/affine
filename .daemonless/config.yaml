@@ -1,0 +1,12 @@
+icon: ':simple-affine:'
+
+cit:
+  mode: screenshot
+  port: 3010
+  health: /api/info
+  compose: true
+
+build:
+  variants:
+    - tag: latest
+      containerfile: Containerfile

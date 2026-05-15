@@ -1,0 +1,15 @@
+#!/bin/sh
+# Run AFFiNE database migrations via predeploy script
+# Requires DATABASE_URL and REDIS_SERVER_HOST to be set
+
+if [ -z "${DATABASE_URL}" ]; then
+    echo "[affine] DATABASE_URL not set, skipping migrations"
+    exit 0
+fi
+
+echo "[affine] Running database migrations..."
+
+cd /app
+# Run as bsd user; predeploy generates private key, runs prisma migrate, and data migrations
+exec /usr/local/bin/s6-setuidgid bsd \
+    /usr/local/bin/node ./scripts/self-host-predeploy.js
