@@ -18,7 +18,6 @@ x-daemonless:
   user: "bsd"
   mlock: false
   community: "Discord:https://discord.gg/Kb9tkhecZT"
-  type: stack
   appjail: true
 
   docs:
