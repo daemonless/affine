@@ -1,7 +1,7 @@
 icon: ':simple-affine:'
 
 cit:
-  mode: screenshot
+  mode: health
   port: 3010
   health: /api/info
   compose: true
