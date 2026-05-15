@@ -130,7 +130,7 @@ FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG NODE_VERSION
-ARG PACKAGES="node${NODE_VERSION} npm-node${NODE_VERSION} openssl ca_root_nss"
+ARG PACKAGES="node${NODE_VERSION} openssl ca_root_nss"
 ARG UPSTREAM_URL="https://api.github.com/repos/toeverything/AFFiNE/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
 {%- if ports %}
