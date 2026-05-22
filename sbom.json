@@ -1,11 +1,11 @@
 {
-  "generated": "2026-05-15T22:18:39Z",
+  "generated": "2026-05-22T23:04:49Z",
   "image": "affine",
   "tags": {
     "latest": {
       "app_version": "v0.26.3",
       "arch": "amd64",
-      "generated": "2026-05-15T22:17:16Z",
+      "generated": "2026-05-22T23:03:32Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -135,7 +135,7 @@
           },
           {
             "name": "ca_root_nss",
-            "version": "3.123.1"
+            "version": "3.124"
           },
           {
             "name": "corepack",
