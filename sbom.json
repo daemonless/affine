@@ -1,11 +1,11 @@
 {
-  "generated": "2026-05-28T23:06:16Z",
+  "generated": "2026-06-11T22:57:59Z",
   "image": "affine",
   "tags": {
     "latest": {
       "app_version": "v0.26.3",
       "arch": "amd64",
-      "generated": "2026-05-28T23:04:59Z",
+      "generated": "2026-06-11T22:56:45Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -227,7 +227,7 @@
         "node": [
           {
             "name": "@affine/server",
-            "version": "0.26.6"
+            "version": "0.26.7"
           },
           {
             "name": "@ai-sdk/anthropic",
