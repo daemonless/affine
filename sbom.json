@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-11T22:57:59Z",
+  "generated": "2026-06-15T09:03:12Z",
   "image": "affine",
   "tags": {
     "latest": {
       "app_version": "v0.26.3",
       "arch": "amd64",
-      "generated": "2026-06-11T22:56:45Z",
+      "generated": "2026-06-15T09:01:44Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -23,7 +23,7 @@
           },
           {
             "name": "FreeBSD-certctl",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-clibs",
@@ -35,15 +35,15 @@
           },
           {
             "name": "FreeBSD-fetch",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-kerberos-lib",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-libarchive",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-libbsdstat",
@@ -59,7 +59,7 @@
           },
           {
             "name": "FreeBSD-libldns",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-libmagic",
@@ -79,15 +79,15 @@
           },
           {
             "name": "FreeBSD-openssl",
-            "version": "15.0p2"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-openssl-lib",
-            "version": "15.0p2"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-rc",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p9"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -107,7 +107,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p9"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -115,7 +115,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-zlib",
@@ -191,7 +191,7 @@
           },
           {
             "name": "openssl",
-            "version": "3.0.19,1"
+            "version": "3.0.21,1"
           },
           {
             "name": "pkg",
