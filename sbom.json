@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-27T17:05:01Z",
+  "generated": "2026-07-10T22:59:31Z",
   "image": "affine",
   "tags": {
     "latest": {
       "app_version": "v0.26.3",
       "arch": "amd64",
-      "generated": "2026-06-27T17:03:47Z",
+      "generated": "2026-07-10T22:58:06Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -27,7 +27,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.0"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -107,7 +107,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -115,7 +115,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-zlib",
@@ -183,7 +183,7 @@
           },
           {
             "name": "node22",
-            "version": "22.22.2"
+            "version": "22.23.1"
           },
           {
             "name": "oniguruma",
