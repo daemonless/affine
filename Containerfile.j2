@@ -65,7 +65,7 @@ RUN pkg update && \
     FreeBSD-clang FreeBSD-clang-dev FreeBSD-clibs-dev FreeBSD-openssl-dev \
     FreeBSD-toolchain FreeBSD-libexecinfo-dev FreeBSD-runtime-dev \
     FreeBSD-utilities-dev FreeBSD-zlib-dev \
-    cmake gmake rust git ca_root_nss && \
+    cmake gmake rust git python3 ca_root_nss && \
     pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
 
 # node22 pkg on FreeBSD installs as /usr/local/bin/node directly (no node22 symlink needed)
@@ -87,10 +87,9 @@ WORKDIR /src
 RUN rm -f rust-toolchain.toml
 
 # Build server-native NAPI module for FreeBSD.
-# CFLAGS: undefine __SSE2__ so mimalloc skips emmintrin.h (not in FreeBSD-clang base).
-# RUSTFLAGS: relocation-model=pic forces global-dynamic TLS so the .node file
-# can be dlopen'd by Node.js without "No space for static TLS" error.
-RUN CFLAGS="-U__SSE2__ -ftls-model=global-dynamic" \
+# global-dynamic TLS (CFLAGS + RUSTFLAGS relocation-model=pic) lets the .node
+# file be dlopen'd by Node.js without the "No space for static TLS" error.
+RUN CFLAGS="-ftls-model=global-dynamic" \
     RUSTFLAGS="-C relocation-model=pic" \
     cargo build --release -p affine_server_native 2>&1 | tail -20 && \
     cp target/release/libaffine_server_native.so /server-native.node && \
@@ -106,7 +105,7 @@ RUN ENGINE_VER=$(cat /engine-version.txt) && \
     cd /prisma-engines && \
     git checkout "${ENGINE_VER}" && \
     cargo fetch 2>&1 | tail -5 && \
-    python3.11 /patch-metrics.py && \
+    python3 /patch-metrics.py && \
     cargo build --release -p query-engine-node-api -p schema-engine-cli 2>&1 | tail -20 && \
     cp target/release/libquery_engine.so /libquery_engine.so.node && \
     cp target/release/schema-engine /schema-engine && \
