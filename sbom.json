@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-10T22:59:31Z",
+  "generated": "2026-07-16T09:27:11Z",
   "image": "affine",
   "tags": {
     "latest": {
-      "app_version": "v0.26.3",
+      "app_version": "v0.27.0",
       "arch": "amd64",
-      "generated": "2026-07-10T22:58:06Z",
+      "generated": "2026-07-16T09:25:52Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -135,11 +135,11 @@
           },
           {
             "name": "ca_root_nss",
-            "version": "3.124"
+            "version": "3.125"
           },
           {
             "name": "corepack",
-            "version": "0.34.6"
+            "version": "0.35.0"
           },
           {
             "name": "execline",
@@ -151,7 +151,7 @@
           },
           {
             "name": "jq",
-            "version": "1.8.1"
+            "version": "1.8.2"
           },
           {
             "name": "libada",
@@ -159,27 +159,31 @@
           },
           {
             "name": "libedit",
-            "version": "3.1.20251016_1,1"
+            "version": "3.1.20260512,1"
+          },
+          {
+            "name": "liblz4",
+            "version": "1.10.0_2,1"
           },
           {
             "name": "libnghttp2",
-            "version": "1.68.1"
+            "version": "1.69.0"
           },
           {
             "name": "libnghttp3",
-            "version": "1.15.0"
+            "version": "1.17.0"
           },
           {
             "name": "libngtcp2",
-            "version": "1.22.1"
+            "version": "1.24.0"
           },
           {
             "name": "libuv",
-            "version": "1.52.0"
+            "version": "1.52.1"
           },
           {
             "name": "llhttp",
-            "version": "9.3.1"
+            "version": "9.4.2"
           },
           {
             "name": "node22",
@@ -195,7 +199,7 @@
           },
           {
             "name": "pkg",
-            "version": "2.6.2_1"
+            "version": "2.7.5"
           },
           {
             "name": "s6",
@@ -203,7 +207,7 @@
           },
           {
             "name": "simdjson",
-            "version": "4.5.0"
+            "version": "4.6.4"
           },
           {
             "name": "skalibs",
@@ -211,7 +215,7 @@
           },
           {
             "name": "sqlite3",
-            "version": "3.50.4_2,1"
+            "version": "3.53.3,1"
           },
           {
             "name": "uvwasi",
@@ -219,7 +223,7 @@
           },
           {
             "name": "zstd",
-            "version": "1.5.7_1"
+            "version": "1.5.7_2"
           }
         ],
         "go": [],
@@ -227,43 +231,7 @@
         "node": [
           {
             "name": "@affine/server",
-            "version": "0.26.7"
-          },
-          {
-            "name": "@ai-sdk/anthropic",
-            "version": "2.0.57"
-          },
-          {
-            "name": "@ai-sdk/gateway",
-            "version": "2.0.24"
-          },
-          {
-            "name": "@ai-sdk/google",
-            "version": "2.0.52"
-          },
-          {
-            "name": "@ai-sdk/google-vertex",
-            "version": "3.0.97"
-          },
-          {
-            "name": "@ai-sdk/openai",
-            "version": "2.0.89"
-          },
-          {
-            "name": "@ai-sdk/openai-compatible",
-            "version": "1.0.30"
-          },
-          {
-            "name": "@ai-sdk/perplexity",
-            "version": "2.0.23"
-          },
-          {
-            "name": "@ai-sdk/provider",
-            "version": "2.0.1"
-          },
-          {
-            "name": "@ai-sdk/provider-utils",
-            "version": "3.0.20"
+            "version": "0.27.1"
           },
           {
             "name": "@apollo/cache-control-types",
@@ -275,11 +243,11 @@
           },
           {
             "name": "@apollo/server",
-            "version": "4.13.0"
+            "version": "5.5.1"
           },
           {
             "name": "@apollo/server-gateway-interface",
-            "version": "1.1.1"
+            "version": "2.0.0"
           },
           {
             "name": "@apollo/server-plugin-landing-page-graphql-playground",
@@ -291,7 +259,7 @@
           },
           {
             "name": "@apollo/utils.createhash",
-            "version": "2.0.2"
+            "version": "3.0.1"
           },
           {
             "name": "@apollo/utils.dropunuseddefinitions",
@@ -299,19 +267,19 @@
           },
           {
             "name": "@apollo/utils.fetcher",
-            "version": "2.0.1"
+            "version": "3.1.0"
           },
           {
             "name": "@apollo/utils.isnodelike",
-            "version": "2.0.1"
+            "version": "3.0.0"
           },
           {
             "name": "@apollo/utils.keyvaluecache",
-            "version": "2.1.1"
+            "version": "4.0.0"
           },
           {
             "name": "@apollo/utils.logger",
-            "version": "2.0.1"
+            "version": "3.0.0"
           },
           {
             "name": "@apollo/utils.printwithreducedwhitespace",
@@ -335,19 +303,15 @@
           },
           {
             "name": "@apollo/utils.withrequired",
-            "version": "2.0.1"
+            "version": "3.0.0"
           },
           {
             "name": "@apollographql/graphql-playground-html",
             "version": "1.6.29"
           },
           {
-            "name": "@babel/code-frame",
-            "version": "7.29.0"
-          },
-          {
-            "name": "@babel/helper-validator-identifier",
-            "version": "7.28.5"
+            "name": "@as-integrations/express5",
+            "version": "1.1.2"
           },
           {
             "name": "@borewit/text-codec",
@@ -378,18 +342,6 @@
             "version": "1.0.0"
           },
           {
-            "name": "@fal-ai/serverless-client",
-            "version": "0.15.0"
-          },
-          {
-            "name": "@fig/complete-commander",
-            "version": "3.2.0"
-          },
-          {
-            "name": "@golevelup/nestjs-discovery",
-            "version": "4.0.3"
-          },
-          {
             "name": "@google-cloud/opentelemetry-cloud-trace-exporter",
             "version": "3.0.0"
           },
@@ -399,15 +351,15 @@
           },
           {
             "name": "@graphql-tools/merge",
-            "version": "8.4.2"
+            "version": "9.1.9"
           },
           {
             "name": "@graphql-tools/schema",
-            "version": "10.0.23"
+            "version": "10.0.33"
           },
           {
             "name": "@graphql-tools/utils",
-            "version": "10.8.6"
+            "version": "11.1.0"
           },
           {
             "name": "@graphql-typed-document-node/core",
@@ -415,23 +367,83 @@
           },
           {
             "name": "@grpc/grpc-js",
-            "version": "1.13.3"
+            "version": "1.14.4"
           },
           {
             "name": "@grpc/proto-loader",
-            "version": "0.7.15"
-          },
-          {
-            "name": "@hono/node-server",
-            "version": "1.19.9"
+            "version": "0.8.0"
           },
           {
             "name": "@html-validate/stylish",
             "version": "4.2.0"
           },
           {
+            "name": "@inquirer/ansi",
+            "version": "2.0.2"
+          },
+          {
+            "name": "@inquirer/checkbox",
+            "version": "5.0.2"
+          },
+          {
+            "name": "@inquirer/confirm",
+            "version": "6.0.2"
+          },
+          {
+            "name": "@inquirer/core",
+            "version": "11.0.2"
+          },
+          {
+            "name": "@inquirer/editor",
+            "version": "5.0.2"
+          },
+          {
+            "name": "@inquirer/expand",
+            "version": "5.0.2"
+          },
+          {
+            "name": "@inquirer/external-editor",
+            "version": "2.0.2"
+          },
+          {
+            "name": "@inquirer/figures",
+            "version": "2.0.2"
+          },
+          {
+            "name": "@inquirer/input",
+            "version": "5.0.2"
+          },
+          {
+            "name": "@inquirer/number",
+            "version": "4.0.2"
+          },
+          {
+            "name": "@inquirer/password",
+            "version": "5.0.2"
+          },
+          {
+            "name": "@inquirer/prompts",
+            "version": "8.0.2"
+          },
+          {
+            "name": "@inquirer/rawlist",
+            "version": "5.0.2"
+          },
+          {
+            "name": "@inquirer/search",
+            "version": "4.0.2"
+          },
+          {
+            "name": "@inquirer/select",
+            "version": "5.0.2"
+          },
+          {
+            "name": "@inquirer/type",
+            "version": "4.0.2"
+          },
+          {
             "name": "@ioredis/commands",
-            "version": "1.4.0"
+            "version": "1.10.0"
           },
           {
             "name": "@isaacs/cliui",
@@ -450,14 +462,6 @@
             "version": "1.1.0"
           },
           {
-            "name": "@modelcontextprotocol/sdk",
-            "version": "1.26.0"
-          },
-          {
-            "name": "@msgpack/msgpack",
-            "version": "3.1.1"
-          },
-          {
             "name": "@napi-rs/nice",
             "version": "1.1.1"
           },
@@ -467,15 +471,15 @@
           },
           {
             "name": "@nestjs-cls/transactional",
-            "version": "2.7.0"
+            "version": "3.2.1"
           },
           {
             "name": "@nestjs-cls/transactional-adapter-prisma",
-            "version": "1.3.4"
+            "version": "1.3.5"
           },
           {
             "name": "@nestjs/apollo",
-            "version": "13.1.0"
+            "version": "13.4.2"
           },
           {
             "name": "@nestjs/bull-shared",
@@ -487,31 +491,31 @@
           },
           {
             "name": "@nestjs/common",
-            "version": "11.1.14"
+            "version": "11.1.27"
           },
           {
             "name": "@nestjs/core",
-            "version": "11.1.14"
+            "version": "11.1.27"
           },
           {
             "name": "@nestjs/graphql",
-            "version": "13.1.0"
+            "version": "13.4.2"
           },
           {
             "name": "@nestjs/mapped-types",
-            "version": "2.1.0"
+            "version": "2.1.1"
           },
           {
             "name": "@nestjs/platform-express",
-            "version": "11.1.14"
+            "version": "11.1.27"
           },
           {
             "name": "@nestjs/platform-socket.io",
-            "version": "11.1.14"
+            "version": "11.1.27"
           },
           {
             "name": "@nestjs/schedule",
-            "version": "6.1.1"
+            "version": "6.1.3"
           },
           {
             "name": "@nestjs/throttler",
@@ -519,7 +523,11 @@
           },
           {
             "name": "@nestjs/websockets",
-            "version": "11.1.14"
+            "version": "11.1.27"
+          },
+          {
+            "name": "@nodable/entities",
+            "version": "2.1.0"
           },
           {
             "name": "@node-rs/argon2",
@@ -548,18 +556,6 @@
           {
             "name": "@nodelib/fs.walk",
             "version": "1.2.8"
-          },
-          {
-            "name": "@nolyfill/array-flatten",
-            "version": "1.0.44"
-          },
-          {
-            "name": "@nolyfill/es-set-tostringtag",
-            "version": "1.0.44"
-          },
-          {
-            "name": "@nolyfill/hasown",
-            "version": "1.0.44"
           },
           {
             "name": "@nolyfill/isarray",
@@ -598,152 +594,148 @@
             "version": "4.0.0"
           },
           {
-            "name": "@nuxt/opencollective",
-            "version": "0.4.1"
-          },
-          {
             "name": "@opentelemetry/api",
-            "version": "1.9.0"
+            "version": "1.9.1"
           },
           {
             "name": "@opentelemetry/api-logs",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/configuration",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/context-async-hooks",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/core",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/exporter-logs-otlp-grpc",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-logs-otlp-http",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-logs-otlp-proto",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-metrics-otlp-grpc",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-metrics-otlp-http",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-metrics-otlp-proto",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-prometheus",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-trace-otlp-grpc",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-trace-otlp-http",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-trace-otlp-proto",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/exporter-zipkin",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/host-metrics",
-            "version": "0.38.2"
+            "version": "0.39.0"
           },
           {
             "name": "@opentelemetry/instrumentation",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/instrumentation-graphql",
-            "version": "0.58.0"
+            "version": "0.67.0"
           },
           {
             "name": "@opentelemetry/instrumentation-http",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/instrumentation-ioredis",
-            "version": "0.59.0"
+            "version": "0.67.0"
           },
           {
             "name": "@opentelemetry/instrumentation-nestjs-core",
-            "version": "0.57.0"
+            "version": "0.65.0"
           },
           {
             "name": "@opentelemetry/instrumentation-socket.io",
-            "version": "0.57.0"
+            "version": "0.66.0"
           },
           {
             "name": "@opentelemetry/otlp-exporter-base",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/otlp-grpc-exporter-base",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/otlp-transformer",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/propagator-b3",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/propagator-jaeger",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/redis-common",
-            "version": "0.38.2"
+            "version": "0.38.3"
           },
           {
             "name": "@opentelemetry/resources",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/sdk-logs",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/sdk-metrics",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/sdk-node",
-            "version": "0.211.0"
+            "version": "0.219.0"
           },
           {
             "name": "@opentelemetry/sdk-trace-base",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/sdk-trace-node",
-            "version": "2.5.0"
+            "version": "2.8.0"
           },
           {
             "name": "@opentelemetry/semantic-conventions",
-            "version": "1.39.0"
+            "version": "1.41.1"
           },
           {
             "name": "@pkgjs/parseargs",
@@ -791,15 +783,15 @@
           },
           {
             "name": "@protobufjs/codegen",
-            "version": "2.0.4"
+            "version": "2.0.5"
           },
           {
             "name": "@protobufjs/eventemitter",
-            "version": "1.1.0"
+            "version": "1.1.1"
           },
           {
             "name": "@protobufjs/fetch",
-            "version": "1.1.0"
+            "version": "1.1.1"
           },
           {
             "name": "@protobufjs/float",
@@ -807,7 +799,7 @@
           },
           {
             "name": "@protobufjs/inquire",
-            "version": "1.1.0"
+            "version": "1.1.1"
           },
           {
             "name": "@protobufjs/path",
@@ -819,7 +811,7 @@
           },
           {
             "name": "@protobufjs/utf8",
-            "version": "1.1.0"
+            "version": "1.1.1"
           },
           {
             "name": "@queuedash/api",
@@ -954,10 +946,6 @@
             "version": "8.3.0"
           },
           {
-            "name": "@standard-schema/spec",
-            "version": "1.0.0"
-          },
-          {
             "name": "@tokenizer/inflate",
             "version": "0.4.1"
           },
@@ -970,32 +958,12 @@
             "version": "11.10.0"
           },
           {
-            "name": "@types/body-parser",
-            "version": "1.19.5"
-          },
-          {
             "name": "@types/busboy",
             "version": "1.5.4"
           },
           {
-            "name": "@types/connect",
-            "version": "3.4.38"
-          },
-          {
             "name": "@types/cors",
             "version": "2.8.18"
-          },
-          {
-            "name": "@types/express",
-            "version": "4.17.25"
-          },
-          {
-            "name": "@types/express-serve-static-core",
-            "version": "4.19.6"
-          },
-          {
-            "name": "@types/http-errors",
-            "version": "2.0.4"
           },
           {
             "name": "@types/long",
@@ -1006,44 +974,20 @@
             "version": "3.7.1"
           },
           {
-            "name": "@types/mime",
-            "version": "1.3.5"
-          },
-          {
             "name": "@types/node",
-            "version": "22.19.1"
-          },
-          {
-            "name": "@types/node-fetch",
-            "version": "2.6.12"
+            "version": "25.6.0"
           },
           {
             "name": "@types/object-path",
             "version": "0.11.4"
           },
           {
-            "name": "@types/qs",
-            "version": "6.9.18"
-          },
-          {
-            "name": "@types/range-parser",
-            "version": "1.2.7"
-          },
-          {
-            "name": "@types/send",
-            "version": "0.17.6"
-          },
-          {
-            "name": "@types/serve-static",
-            "version": "1.15.10"
-          },
-          {
             "name": "@types/triple-beam",
             "version": "1.3.5"
           },
           {
-            "name": "@vercel/oidc",
-            "version": "3.0.5"
+            "name": "@types/ws",
+            "version": "8.18.1"
           },
           {
             "name": "@whatwg-node/promise-helpers",
@@ -1059,7 +1003,7 @@
           },
           {
             "name": "acorn",
-            "version": "8.15.0"
+            "version": "8.16.0"
           },
           {
             "name": "acorn-import-attributes",
@@ -1070,20 +1014,8 @@
             "version": "7.1.3"
           },
           {
-            "name": "ai",
-            "version": "5.0.118"
-          },
-          {
             "name": "ajv",
             "version": "8.18.0"
-          },
-          {
-            "name": "ajv-formats",
-            "version": "3.0.1"
-          },
-          {
-            "name": "ansi-escapes",
-            "version": "4.3.2"
           },
           {
             "name": "ansi-regex",
@@ -1098,20 +1030,12 @@
             "version": "1.0.0"
           },
           {
-            "name": "argparse",
-            "version": "2.0.1"
-          },
-          {
             "name": "async",
             "version": "3.2.6"
           },
           {
             "name": "async-retry",
             "version": "1.3.3"
-          },
-          {
-            "name": "asynckit",
-            "version": "0.4.0"
           },
           {
             "name": "aws4",
@@ -1123,7 +1047,7 @@
           },
           {
             "name": "balanced-match",
-            "version": "4.0.3"
+            "version": "1.0.2"
           },
           {
             "name": "base64-js",
@@ -1134,28 +1058,24 @@
             "version": "2.0.0"
           },
           {
+            "name": "benchmark",
+            "version": "1.0.0"
+          },
+          {
             "name": "bignumber.js",
             "version": "9.3.0"
           },
           {
-            "name": "bl",
-            "version": "4.1.0"
-          },
-          {
             "name": "body-parser",
-            "version": "1.20.4"
+            "version": "2.2.2"
           },
           {
             "name": "brace-expansion",
-            "version": "5.0.2"
+            "version": "2.1.0"
           },
           {
             "name": "braces",
             "version": "3.0.3"
-          },
-          {
-            "name": "buffer",
-            "version": "5.7.1"
           },
           {
             "name": "buffer-equal-constant-time",
@@ -1167,7 +1087,7 @@
           },
           {
             "name": "bullmq",
-            "version": "5.53.0"
+            "version": "5.79.0"
           },
           {
             "name": "busboy",
@@ -1182,16 +1102,8 @@
             "version": "19.0.1"
           },
           {
-            "name": "callsites",
-            "version": "3.1.0"
-          },
-          {
-            "name": "chalk",
-            "version": "4.1.2"
-          },
-          {
             "name": "chardet",
-            "version": "0.7.0"
+            "version": "2.1.1"
           },
           {
             "name": "chokidar",
@@ -1203,31 +1115,19 @@
           },
           {
             "name": "cjs-module-lexer",
-            "version": "1.4.3"
-          },
-          {
-            "name": "cli-cursor",
-            "version": "3.1.0"
-          },
-          {
-            "name": "cli-spinners",
-            "version": "2.9.2"
+            "version": "2.2.0"
           },
           {
             "name": "cli-width",
-            "version": "3.0.0"
+            "version": "4.1.0"
           },
           {
             "name": "cliui",
             "version": "8.0.1"
           },
           {
-            "name": "clone",
-            "version": "1.0.4"
-          },
-          {
             "name": "cluster-key-slot",
-            "version": "1.1.2"
+            "version": "1.1.1"
           },
           {
             "name": "color",
@@ -1250,24 +1150,16 @@
             "version": "1.1.4"
           },
           {
-            "name": "combined-stream",
-            "version": "1.0.8"
-          },
-          {
             "name": "commander",
-            "version": "11.1.0"
+            "version": "13.1.0"
           },
           {
             "name": "concat-stream",
             "version": "2.0.0"
           },
           {
-            "name": "consola",
-            "version": "3.4.2"
-          },
-          {
             "name": "content-disposition",
-            "version": "0.5.4"
+            "version": "1.0.0"
           },
           {
             "name": "content-type",
@@ -1287,15 +1179,11 @@
           },
           {
             "name": "corepack",
-            "version": "0.34.6"
+            "version": "0.35.0"
           },
           {
             "name": "cors",
             "version": "2.8.6"
-          },
-          {
-            "name": "cosmiconfig",
-            "version": "8.3.6"
           },
           {
             "name": "cron",
@@ -1335,23 +1223,15 @@
           },
           {
             "name": "date-fns",
-            "version": "4.1.0"
+            "version": "4.4.0"
           },
           {
             "name": "debug",
-            "version": "2.6.9"
+            "version": "4.3.7"
           },
           {
             "name": "deepmerge",
             "version": "4.3.1"
-          },
-          {
-            "name": "defaults",
-            "version": "1.0.4"
-          },
-          {
-            "name": "delayed-stream",
-            "version": "1.0.0"
           },
           {
             "name": "denque",
@@ -1360,10 +1240,6 @@
           {
             "name": "depd",
             "version": "2.0.0"
-          },
-          {
-            "name": "destroy",
-            "version": "1.2.0"
           },
           {
             "name": "detect-libc",
@@ -1390,10 +1266,6 @@
             "version": "16.4.7"
           },
           {
-            "name": "dset",
-            "version": "3.1.4"
-          },
-          {
             "name": "eastasianwidth",
             "version": "0.2.0"
           },
@@ -1407,7 +1279,7 @@
           },
           {
             "name": "emoji-regex",
-            "version": "8.0.0"
+            "version": "10.4.0"
           },
           {
             "name": "enabled",
@@ -1423,7 +1295,7 @@
           },
           {
             "name": "engine.io",
-            "version": "6.6.4"
+            "version": "6.6.9"
           },
           {
             "name": "engine.io-parser",
@@ -1442,20 +1314,12 @@
             "version": "2.0.3"
           },
           {
-            "name": "error-ex",
-            "version": "1.3.2"
-          },
-          {
             "name": "escalade",
             "version": "3.2.0"
           },
           {
             "name": "escape-html",
             "version": "1.0.3"
-          },
-          {
-            "name": "escape-string-regexp",
-            "version": "1.0.5"
           },
           {
             "name": "etag",
@@ -1470,14 +1334,6 @@
             "version": "3.1.2"
           },
           {
-            "name": "eventsource",
-            "version": "3.0.7"
-          },
-          {
-            "name": "eventsource-parser",
-            "version": "1.1.2"
-          },
-          {
             "name": "exa-js",
             "version": "2.4.0"
           },
@@ -1487,19 +1343,11 @@
           },
           {
             "name": "express",
-            "version": "4.22.1"
-          },
-          {
-            "name": "express-rate-limit",
-            "version": "8.2.1"
+            "version": "5.2.1"
           },
           {
             "name": "extend",
             "version": "3.0.2"
-          },
-          {
-            "name": "external-editor",
-            "version": "3.1.0"
           },
           {
             "name": "fast-deep-equal",
@@ -1515,11 +1363,15 @@
           },
           {
             "name": "fast-uri",
-            "version": "3.0.6"
+            "version": "3.1.2"
+          },
+          {
+            "name": "fast-xml-builder",
+            "version": "1.2.0"
           },
           {
             "name": "fast-xml-parser",
-            "version": "5.3.7"
+            "version": "5.8.0"
           },
           {
             "name": "fastq",
@@ -1538,12 +1390,8 @@
             "version": "3.2.0"
           },
           {
-            "name": "figures",
-            "version": "3.2.0"
-          },
-          {
             "name": "file-type",
-            "version": "21.3.0"
+            "version": "21.3.4"
           },
           {
             "name": "fill-range",
@@ -1551,7 +1399,7 @@
           },
           {
             "name": "finalhandler",
-            "version": "1.3.2"
+            "version": "2.1.0"
           },
           {
             "name": "fn.name",
@@ -1560,10 +1408,6 @@
           {
             "name": "foreground-child",
             "version": "3.3.1"
-          },
-          {
-            "name": "form-data",
-            "version": "4.0.5"
           },
           {
             "name": "formdata-polyfill",
@@ -1579,7 +1423,7 @@
           },
           {
             "name": "fresh",
-            "version": "0.5.2"
+            "version": "2.0.0"
           },
           {
             "name": "fs-capacitor",
@@ -1604,6 +1448,10 @@
           {
             "name": "get-caller-file",
             "version": "2.0.5"
+          },
+          {
+            "name": "get-east-asian-width",
+            "version": "1.5.0"
           },
           {
             "name": "get-stream",
@@ -1631,7 +1479,7 @@
           },
           {
             "name": "graphql",
-            "version": "16.12.0"
+            "version": "16.13.2"
           },
           {
             "name": "graphql-scalars",
@@ -1647,19 +1495,11 @@
           },
           {
             "name": "graphql-ws",
-            "version": "6.0.4"
+            "version": "6.0.8"
           },
           {
             "name": "gtoken",
             "version": "7.1.0"
-          },
-          {
-            "name": "has-flag",
-            "version": "4.0.0"
-          },
-          {
-            "name": "hono",
-            "version": "4.12.0"
           },
           {
             "name": "html-to-text",
@@ -1695,19 +1535,15 @@
           },
           {
             "name": "iconv-lite",
-            "version": "0.4.24"
+            "version": "0.6.3"
           },
           {
             "name": "ieee754",
             "version": "1.2.1"
           },
           {
-            "name": "import-fresh",
-            "version": "3.3.1"
-          },
-          {
             "name": "import-in-the-middle",
-            "version": "2.0.0"
+            "version": "3.0.0"
           },
           {
             "name": "imurmurhash",
@@ -1718,16 +1554,12 @@
             "version": "2.0.4"
           },
           {
-            "name": "inquirer",
-            "version": "8.2.6"
-          },
-          {
             "name": "ioredis",
-            "version": "5.8.2"
+            "version": "5.11.1"
           },
           {
             "name": "ip-address",
-            "version": "10.0.1"
+            "version": "10.2.0"
           },
           {
             "name": "ipaddr.js",
@@ -1735,7 +1567,7 @@
           },
           {
             "name": "is-arrayish",
-            "version": "0.2.1"
+            "version": "0.3.2"
           },
           {
             "name": "is-extglob",
@@ -1748,10 +1580,6 @@
           {
             "name": "is-glob",
             "version": "4.0.3"
-          },
-          {
-            "name": "is-interactive",
-            "version": "1.0.0"
           },
           {
             "name": "is-mobile",
@@ -1768,10 +1596,6 @@
           {
             "name": "is-stream",
             "version": "2.0.1"
-          },
-          {
-            "name": "is-unicode-supported",
-            "version": "0.1.0"
           },
           {
             "name": "isexe",
@@ -1802,36 +1626,12 @@
             "version": "6.1.3"
           },
           {
-            "name": "js-tokens",
-            "version": "4.0.0"
-          },
-          {
-            "name": "js-yaml",
-            "version": "4.1.1"
-          },
-          {
-            "name": "jsbn",
-            "version": "1.1.0"
-          },
-          {
             "name": "json-bigint",
             "version": "1.0.0"
           },
           {
-            "name": "json-parse-even-better-errors",
-            "version": "2.3.1"
-          },
-          {
-            "name": "json-schema",
-            "version": "0.4.0"
-          },
-          {
             "name": "json-schema-traverse",
             "version": "1.0.0"
-          },
-          {
-            "name": "json-schema-typed",
-            "version": "8.0.2"
           },
           {
             "name": "jsonwebtoken",
@@ -1862,36 +1662,24 @@
             "version": "0.2.114"
           },
           {
-            "name": "lines-and-columns",
-            "version": "1.2.4"
-          },
-          {
             "name": "load-esm",
             "version": "1.0.3"
           },
           {
             "name": "lodash",
-            "version": "4.17.21"
+            "version": "4.18.1"
           },
           {
             "name": "lodash-es",
-            "version": "4.17.23"
+            "version": "4.18.1"
           },
           {
             "name": "lodash.camelcase",
             "version": "4.3.0"
           },
           {
-            "name": "lodash.defaults",
-            "version": "4.2.0"
-          },
-          {
             "name": "lodash.includes",
             "version": "4.3.0"
-          },
-          {
-            "name": "lodash.isarguments",
-            "version": "3.1.0"
           },
           {
             "name": "lodash.isboolean",
@@ -1915,7 +1703,7 @@
           },
           {
             "name": "lodash.omit",
-            "version": "4.5.0"
+            "version": "4.18.0"
           },
           {
             "name": "lodash.once",
@@ -1924,10 +1712,6 @@
           {
             "name": "lodash.sortby",
             "version": "4.7.0"
-          },
-          {
-            "name": "log-symbols",
-            "version": "4.1.0"
           },
           {
             "name": "logform",
@@ -1963,23 +1747,15 @@
           },
           {
             "name": "merge-descriptors",
-            "version": "1.0.3"
+            "version": "2.0.0"
           },
           {
             "name": "merge2",
             "version": "1.4.1"
           },
           {
-            "name": "methods",
-            "version": "1.1.2"
-          },
-          {
             "name": "micromatch",
             "version": "4.0.8"
-          },
-          {
-            "name": "mime",
-            "version": "1.6.0"
           },
           {
             "name": "mime-db",
@@ -1990,12 +1766,8 @@
             "version": "2.1.35"
           },
           {
-            "name": "mimic-fn",
-            "version": "2.1.0"
-          },
-          {
             "name": "minimatch",
-            "version": "9.0.6"
+            "version": "9.0.9"
           },
           {
             "name": "minimist",
@@ -2030,28 +1802,24 @@
             "version": "3.1.0"
           },
           {
-            "name": "mkdirp",
-            "version": "0.5.6"
-          },
-          {
             "name": "module-details-from-path",
             "version": "1.0.4"
           },
           {
             "name": "ms",
-            "version": "2.0.0"
+            "version": "2.1.3"
           },
           {
             "name": "msgpackr",
-            "version": "1.11.2"
+            "version": "2.0.2"
           },
           {
             "name": "msgpackr-extract",
-            "version": "3.0.3"
+            "version": "3.0.4"
           },
           {
             "name": "multer",
-            "version": "2.0.2"
+            "version": "2.2.0"
           },
           {
             "name": "mustache",
@@ -2059,7 +1827,7 @@
           },
           {
             "name": "mute-stream",
-            "version": "0.0.8"
+            "version": "3.0.0"
           },
           {
             "name": "nanoid",
@@ -2068,10 +1836,6 @@
           {
             "name": "negotiator",
             "version": "0.6.3"
-          },
-          {
-            "name": "nest-commander",
-            "version": "3.17.0"
           },
           {
             "name": "nest-winston",
@@ -2103,7 +1867,7 @@
           },
           {
             "name": "nodemailer",
-            "version": "7.0.11"
+            "version": "9.0.1"
           },
           {
             "name": "nopt",
@@ -2146,36 +1910,16 @@
             "version": "1.0.0"
           },
           {
-            "name": "onetime",
-            "version": "5.1.2"
-          },
-          {
             "name": "openai",
             "version": "5.23.2"
           },
           {
-            "name": "ora",
-            "version": "5.4.1"
-          },
-          {
-            "name": "os-tmpdir",
-            "version": "1.0.2"
-          },
-          {
             "name": "p-map",
-            "version": "7.0.3"
+            "version": "7.0.4"
           },
           {
             "name": "package-json-from-dist",
             "version": "1.0.1"
-          },
-          {
-            "name": "parent-module",
-            "version": "1.0.1"
-          },
-          {
-            "name": "parse-json",
-            "version": "5.2.0"
           },
           {
             "name": "parseley",
@@ -2184,6 +1928,10 @@
           {
             "name": "parseurl",
             "version": "1.3.3"
+          },
+          {
+            "name": "path-expression-matcher",
+            "version": "1.5.0"
           },
           {
             "name": "path-key",
@@ -2195,31 +1943,19 @@
           },
           {
             "name": "path-to-regexp",
-            "version": "0.1.12"
-          },
-          {
-            "name": "path-type",
-            "version": "4.0.0"
+            "version": "8.4.2"
           },
           {
             "name": "peberminta",
             "version": "0.9.0"
           },
           {
-            "name": "picocolors",
-            "version": "1.1.1"
-          },
-          {
             "name": "picomatch",
-            "version": "2.3.1"
+            "version": "2.3.2"
           },
           {
             "name": "piscina",
-            "version": "5.1.4"
-          },
-          {
-            "name": "pkce-challenge",
-            "version": "5.0.0"
+            "version": "5.2.0"
           },
           {
             "name": "prettier",
@@ -2230,7 +1966,7 @@
             "version": "6.8.2"
           },
           {
-            "name": "prisma-client-d69402fcc7df06a25b34b21fe89d360b33c0b62e3d1a488037e5b591dc36c04b",
+            "name": "prisma-client-204cca070c2b24245f85c4d07fb6048f677202d8fd3819636a1d348247b6db60",
             "version": "6.8.2"
           },
           {
@@ -2251,7 +1987,7 @@
           },
           {
             "name": "protobufjs",
-            "version": "7.5.4"
+            "version": "7.6.4"
           },
           {
             "name": "proxy-addr",
@@ -2259,7 +1995,7 @@
           },
           {
             "name": "qs",
-            "version": "6.14.2"
+            "version": "6.15.2"
           },
           {
             "name": "queue-microtask",
@@ -2271,7 +2007,7 @@
           },
           {
             "name": "raw-body",
-            "version": "2.5.3"
+            "version": "3.0.2"
           },
           {
             "name": "react",
@@ -2326,14 +2062,6 @@
             "version": "8.0.1"
           },
           {
-            "name": "resolve-from",
-            "version": "4.0.0"
-          },
-          {
-            "name": "restore-cursor",
-            "version": "3.1.0"
-          },
-          {
             "name": "retry",
             "version": "0.12.0"
           },
@@ -2342,16 +2070,8 @@
             "version": "1.1.0"
           },
           {
-            "name": "robot3",
-            "version": "0.4.1"
-          },
-          {
             "name": "router",
             "version": "2.2.0"
-          },
-          {
-            "name": "run-async",
-            "version": "2.4.1"
           },
           {
             "name": "run-parallel",
@@ -2379,19 +2099,19 @@
           },
           {
             "name": "semver",
-            "version": "7.7.4"
+            "version": "7.8.1"
           },
           {
             "name": "send",
-            "version": "0.19.2"
+            "version": "1.2.0"
           },
           {
             "name": "serve-static",
-            "version": "1.16.3"
+            "version": "2.2.0"
           },
           {
             "name": "ses",
-            "version": "1.14.0"
+            "version": "1.15.0"
           },
           {
             "name": "setprototypeof",
@@ -2411,7 +2131,7 @@
           },
           {
             "name": "signal-exit",
-            "version": "3.0.7"
+            "version": "4.1.0"
           },
           {
             "name": "simple-swizzle",
@@ -2435,19 +2155,15 @@
           },
           {
             "name": "socket.io-parser",
-            "version": "4.2.4"
+            "version": "4.2.6"
           },
           {
             "name": "socks",
-            "version": "2.8.4"
+            "version": "2.8.9"
           },
           {
             "name": "socks-proxy-agent",
             "version": "8.0.5"
-          },
-          {
-            "name": "sprintf-js",
-            "version": "1.1.3"
           },
           {
             "name": "ssri",
@@ -2487,7 +2203,7 @@
           },
           {
             "name": "strnum",
-            "version": "2.1.2"
+            "version": "2.3.0"
           },
           {
             "name": "strtok3",
@@ -2498,32 +2214,24 @@
             "version": "0.11.0"
           },
           {
-            "name": "supports-color",
-            "version": "7.2.0"
-          },
-          {
             "name": "symbol-observable",
             "version": "1.2.0"
           },
           {
             "name": "systeminformation",
-            "version": "5.30.3"
+            "version": "5.31.7"
           },
           {
             "name": "tar",
-            "version": "7.5.9"
+            "version": "7.5.16"
           },
           {
             "name": "text-hex",
             "version": "1.0.0"
           },
           {
-            "name": "through",
-            "version": "2.3.8"
-          },
-          {
             "name": "tinyglobby",
-            "version": "0.2.15"
+            "version": "0.2.17"
           },
           {
             "name": "tldts",
@@ -2532,10 +2240,6 @@
           {
             "name": "tldts-core",
             "version": "7.0.19"
-          },
-          {
-            "name": "tmp",
-            "version": "0.0.33"
           },
           {
             "name": "to-buffer",
@@ -2566,10 +2270,6 @@
             "version": "2.8.1"
           },
           {
-            "name": "type-fest",
-            "version": "0.21.3"
-          },
-          {
             "name": "type-is",
             "version": "1.6.18"
           },
@@ -2587,7 +2287,7 @@
           },
           {
             "name": "undici-types",
-            "version": "6.21.0"
+            "version": "7.19.2"
           },
           {
             "name": "unique-filename",
@@ -2606,24 +2306,12 @@
             "version": "1.0.2"
           },
           {
-            "name": "utils-merge",
-            "version": "1.0.1"
-          },
-          {
             "name": "uuid",
             "version": "9.0.1"
           },
           {
-            "name": "value-or-promise",
-            "version": "1.0.12"
-          },
-          {
             "name": "vary",
             "version": "1.1.2"
-          },
-          {
-            "name": "wcwidth",
-            "version": "1.0.1"
           },
           {
             "name": "web-streams-polyfill",
@@ -2635,7 +2323,7 @@
           },
           {
             "name": "whatwg-mimetype",
-            "version": "3.0.0"
+            "version": "4.0.0"
           },
           {
             "name": "whatwg-url",
@@ -2655,7 +2343,7 @@
           },
           {
             "name": "wrap-ansi",
-            "version": "6.2.0"
+            "version": "7.0.0"
           },
           {
             "name": "wrappy",
@@ -2663,15 +2351,15 @@
           },
           {
             "name": "ws",
-            "version": "7.5.10"
+            "version": "7.5.11"
+          },
+          {
+            "name": "xml-naming",
+            "version": "0.1.0"
           },
           {
             "name": "xss",
             "version": "1.0.15"
-          },
-          {
-            "name": "xtend",
-            "version": "4.0.2"
           },
           {
             "name": "y18n",
@@ -2683,7 +2371,7 @@
           },
           {
             "name": "yaml",
-            "version": "2.8.2"
+            "version": "2.8.3"
           },
           {
             "name": "yargs",
@@ -2714,15 +2402,15 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 53,
+        "freebsd": 54,
         "go": 0,
         "java": 0,
-        "node": 620,
+        "node": 541,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 673
+        "total": 595
       }
     }
   }
