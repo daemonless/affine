@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-16T09:27:11Z",
+  "generated": "2026-07-20T20:24:54Z",
   "image": "affine",
   "tags": {
     "latest": {
-      "app_version": "v0.27.0",
+      "app_version": "v0.27.2",
       "arch": "amd64",
-      "generated": "2026-07-16T09:25:52Z",
+      "generated": "2026-07-20T20:23:38Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -67,6 +67,10 @@
           },
           {
             "name": "FreeBSD-libucl",
+            "version": "15.0"
+          },
+          {
+            "name": "FreeBSD-locales",
             "version": "15.0"
           },
           {
@@ -231,7 +235,7 @@
         "node": [
           {
             "name": "@affine/server",
-            "version": "0.27.1"
+            "version": "0.27.2"
           },
           {
             "name": "@apollo/cache-control-types",
@@ -2402,7 +2406,7 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 54,
+        "freebsd": 55,
         "go": 0,
         "java": 0,
         "node": 541,
@@ -2410,7 +2414,7 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 595
+        "total": 596
       }
     }
   }
