@@ -18,7 +18,6 @@ x-daemonless:
   user: "bsd"
   mlock: false
   community: "Discord:https://discord.gg/Kb9tkhecZT"
-  type: stack
   # Sidecars for the AppJail director bundle (podman reads the services
   # below; director renders the app from them plus these). Host networking
   # so "localhost" reaches redis/postgres from the app jail.
