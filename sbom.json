@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-31T22:42:11Z",
+  "generated": "2026-09-12T10:47:42Z",
   "image": "affine",
   "tags": {
     "latest": {
       "app_version": "v0.27.4",
       "arch": "amd64",
-      "generated": "2026-08-31T22:40:59Z",
+      "generated": "2026-09-12T10:46:35Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -252,7 +252,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.127"
+            "version": "3.129"
           },
           {
             "licenses": [
@@ -345,7 +345,7 @@
               "MIT"
             ],
             "name": "node22",
-            "version": "22.23.1"
+            "version": "22.23.2"
           },
           {
             "licenses": [
@@ -359,7 +359,7 @@
               "APACHE20"
             ],
             "name": "openssl",
-            "version": "3.0.21,1"
+            "version": "3.0.22,1"
           },
           {
             "licenses": [
@@ -381,7 +381,7 @@
               "APACHE20"
             ],
             "name": "simdjson",
-            "version": "4.6.8"
+            "version": "4.6.11"
           },
           {
             "licenses": [
