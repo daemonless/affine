@@ -18,7 +18,28 @@ x-daemonless:
   user: "bsd"
   mlock: false
   community: "Discord:https://discord.gg/Kb9tkhecZT"
-  appjail: true
+  type: stack
+  # Sidecars for the AppJail director bundle (podman reads the services
+  # below; director renders the app from them plus these). Host networking
+  # so "localhost" reaches redis/postgres from the app jail.
+  appjail:
+    director:
+      options:
+        - alias:
+        - ip4_inherit:
+    depends_on:
+      - name: affine-redis
+        image: ghcr.io/daemonless/redis:latest
+      - name: affine-postgres
+        image: ghcr.io/daemonless/postgres:latest
+        template: postgres-template.conf
+        env:
+          POSTGRES_USER: affine
+          POSTGRES_PASSWORD: "!ENV '${DB_PASSWORD}'"
+          POSTGRES_DB: affine
+          POSTGRES_EXTENSIONS: pgvector
+        volumes:
+          db_data: /var/lib/postgresql/data
 
   docs:
     manual: true
@@ -26,6 +47,9 @@ x-daemonless:
       DB_DATA_LOCATION: "Path to store PostgreSQL data files"
       AFFINE_DATA_LOCATION: "Path to store AFFiNE config and uploads"
       DB_PASSWORD: "PostgreSQL password"
+      TZ:
+        desc: "Timezone"
+        optional: true
       AFFINE_SERVER_HOST: "Public hostname for AFFiNE (e.g. affine.example.com)"
       AFFINE_SERVER_HTTPS: "Set to true if serving over HTTPS (default: false)"
       AFFINE_INDEXER_ENABLED: "Enable document indexer (default: false)"
@@ -44,6 +68,7 @@ services:
       DATABASE_URL: postgresql://affine:${DB_PASSWORD}@localhost:5432/affine
       REDIS_SERVER_HOST: localhost
       AFFINE_INDEXER_ENABLED: "false"
+      TZ: ${TZ:-UTC}
     env_file:
       - .env
     volumes:
