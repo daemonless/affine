@@ -1,8 +1,8 @@
 #!/bin/sh
-# AFFiNE s6 service
+# Start affine; /init has already dropped to the run user.
 
 echo "[affine] Starting server..."
 
 cd /app
-exec /usr/local/bin/s6-setuidgid bsd \
+exec \
     /usr/local/bin/node ./dist/main.js

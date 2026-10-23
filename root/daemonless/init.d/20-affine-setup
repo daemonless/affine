@@ -1,0 +1,17 @@
+#!/bin/sh
+# AFFiNE data directory setup
+
+echo "[affine] Setting up config directory"
+
+# Create AFFiNE data directories (HOME=/config → ~/.affine/ resolves here)
+mkdir -p /config/.affine/config /config/.affine/storage
+
+# As non-root (podman --user), ownership is the runtime's.
+if [ "$(id -u)" = 0 ]; then
+    chown -R bsd:bsd /config
+    # The server writes schema.gql to /app/src, owned by the build-time bsd
+    # (1000): follow a PUID change.
+    chown -R bsd:bsd /app/src
+fi
+
+echo "[affine] Setup complete"

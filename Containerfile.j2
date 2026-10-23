@@ -7,7 +7,7 @@ ARG NODE_VERSION=22
 FROM --platform=linux/amd64 ghcr.io/toeverything/affine:stable AS upstream
 
 # Stage 2: Build FreeBSD production Node.js dependencies
-FROM ghcr.io/daemonless/base:${BASE_VERSION} AS deps-builder
+FROM ghcr.io/daemonless/base-core:${BASE_VERSION} AS deps-builder
 ARG NODE_VERSION
 
 RUN pkg update && \
@@ -56,7 +56,7 @@ RUN mv node_modules packages/backend/server/
 #   - server-native: AFFiNE's Rust NAPI module (doc processing, AI, image handling, etc.)
 #   - prisma query-engine-node-api: Prisma's Node.js query engine for FreeBSD
 #   - prisma schema-engine-cli: used by predeploy script for database migrations
-FROM ghcr.io/daemonless/base:${BASE_VERSION} AS native-builder
+FROM ghcr.io/daemonless/base-core:${BASE_VERSION} AS native-builder
 ARG NODE_VERSION
 
 RUN pkg update && \
@@ -125,7 +125,7 @@ RUN git clone --depth 1 https://github.com/napi-rs/node-rs.git /node-rs && \
     rm -rf /node-rs ~/.cargo/registry ~/.cargo/git
 
 # Production image
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG NODE_VERSION
@@ -245,9 +245,9 @@ ENV NODE_ENV=production \
 
 # Copy service definitions and init scripts
 COPY root/ /
+RUN chmod +x /daemonless/libexec/affine /daemonless/init.d/*
 
-RUN chmod +x /etc/services.d/affine/run \
-    /etc/cont-init.d/* 2>/dev/null || true
+CMD ["/daemonless/libexec/affine"]
 
 # --- Expose (Injected by Generator) ---
 {%- if ports %}

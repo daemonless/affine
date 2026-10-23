@@ -11,5 +11,7 @@ echo "[affine] Running database migrations..."
 
 cd /app
 # Run as bsd user; predeploy generates private key, runs prisma migrate, and data migrations
-exec /usr/local/bin/s6-setuidgid bsd \
-    /usr/local/bin/node ./scripts/self-host-predeploy.js
+if [ "$(id -u)" = 0 ]; then
+    set -- dsu bsd
+fi
+exec "$@" /usr/local/bin/node ./scripts/self-host-predeploy.js
