@@ -49,25 +49,19 @@ RUN node -e " \
 RUN HUSKY=0 ELECTRON_SKIP_BINARY_DOWNLOAD=1 SENTRYCLI_SKIP_DOWNLOAD=1 \
     yarn workspaces focus @affine/server --production
 
-# Save Prisma engine version so native-builder can clone the matching prisma-engines commit.
-# The upstream image already has a pre-generated .prisma/client/ (pure JS, platform-agnostic)
-# that we copy directly in the runtime stage — no need to run prisma generate on FreeBSD.
-RUN node -e "console.log(require('./node_modules/@prisma/engines-version').enginesVersion)" \
-    > /engine-version.txt
-
 # Move node_modules into the server package directory (matches official image layout)
 RUN mv node_modules packages/backend/server/
 
 # Stage 3: Build FreeBSD native binaries
 #   - server-native: AFFiNE's Rust NAPI module (doc processing, AI, image handling, etc.)
-#   - prisma query-engine-node-api: Prisma's Node.js query engine for FreeBSD
-#   - prisma schema-engine-cli: used by predeploy script for database migrations
+#   - @node-rs/crc32 + @node-rs/argon2: built with global-dynamic TLS for FreeBSD dlopen
 FROM ghcr.io/daemonless/base-core:${BASE_VERSION} AS native-builder
 ARG NODE_VERSION
 
 RUN pkg update && \
     pkg install -y \
     node${NODE_VERSION} \
+    prisma-engines \
     FreeBSD-clang FreeBSD-clang-dev FreeBSD-clibs-dev FreeBSD-openssl-dev \
     FreeBSD-toolchain FreeBSD-libexecinfo-dev FreeBSD-runtime-dev \
     FreeBSD-utilities-dev FreeBSD-zlib-dev \
@@ -77,10 +71,6 @@ RUN pkg update && \
 # node22 pkg on FreeBSD installs as /usr/local/bin/node directly (no node22 symlink needed)
 
 COPY --from=deps-builder /version.txt /version.txt
-COPY --from=deps-builder /engine-version.txt /engine-version.txt
-
-# Patch script to fix metrics-0.23.0 Rust 1.94.0 E0521 lifetime error
-COPY patch-metrics.py /patch-metrics.py
 
 # Clone AFFiNE at the same version for the Cargo workspace
 RUN git clone --depth 1 --branch "$(cat /version.txt)" \
@@ -101,22 +91,10 @@ RUN CFLAGS="-ftls-model=global-dynamic" \
     cp target/release/libaffine_server_native.so /server-native.node && \
     rm -rf target ~/.cargo/registry ~/.cargo/git
 
-# Build Prisma engines for FreeBSD from the pinned commit matching the installed Prisma version.
-# metrics-0.23.0 (a transitive dep of prisma-engines) fails to compile on Rust >=1.94.0
-# due to E0521 (lifetime escape via raw pointer coercion of trait objects).
-# Fix: cargo fetch to populate the cache, then patch metrics-0.23.0 to add 'static
-# bound on set_local_recorder's type parameter before building.
-RUN ENGINE_VER=$(cat /engine-version.txt) && \
-    git clone https://github.com/prisma/prisma-engines.git /prisma-engines && \
-    cd /prisma-engines && \
-    git checkout "${ENGINE_VER}" && \
-    cargo fetch 2>&1 | tail -5 && \
-    python3 /patch-metrics.py && \
-    cargo build --release -p query-engine-node-api -p schema-engine-cli 2>&1 | tail -20 && \
-    cp target/release/libquery_engine.so /libquery_engine.so.node && \
-    cp target/release/schema-engine /schema-engine && \
-    chmod 755 /schema-engine && \
-    rm -rf /prisma-engines ~/.cargo/registry ~/.cargo/git
+# Copy prebuilt Prisma engines from the FreeBSD prisma-engines package
+RUN cp /usr/local/libexec/prisma-engines/libquery_engine.so /libquery_engine.so.node && \
+    cp /usr/local/libexec/prisma-engines/schema-engine /schema-engine && \
+    chmod 755 /schema-engine
 
 # Build @node-rs/crc32 and @node-rs/argon2 from source.
 # Pre-built FreeBSD binaries use initial-exec TLS which fails when dlopen'd by Node.js.
