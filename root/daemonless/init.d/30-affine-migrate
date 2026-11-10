@@ -7,6 +7,20 @@ if [ -z "${DATABASE_URL}" ]; then
     exit 0
 fi
 
+# Wait for PostgreSQL to accept connections before running migrations
+DB_HOST=$(printf '%s' "${DATABASE_URL}" | sed -n 's|.*@\([^:/?]*\).*|\1|p')
+DB_PORT=$(printf '%s' "${DATABASE_URL}" | sed -n 's|.*@[^:/?]*:\([0-9]*\).*|\1|p')
+DB_HOST=${DB_HOST:-127.0.0.1}
+DB_PORT=${DB_PORT:-5432}
+
+echo "[affine] Waiting for PostgreSQL at ${DB_HOST}:${DB_PORT}..."
+for i in $(seq 1 60); do
+    if nc -z "${DB_HOST}" "${DB_PORT}" >/dev/null 2>&1; then
+        break
+    fi
+    sleep 1
+done
+
 echo "[affine] Running database migrations..."
 
 cd /app
