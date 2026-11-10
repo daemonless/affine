@@ -28,4 +28,16 @@ cd /app
 if [ "$(id -u)" = 0 ]; then
     set -- dsu bsd
 fi
-exec "$@" /usr/local/bin/node ./scripts/self-host-predeploy.js
+
+# Retry predeploy up to 15 times (PostgreSQL starts a temporary instance during
+# initdb and briefly restarts before accepting connections on the target DB).
+for attempt in $(seq 1 15); do
+    if "$@" /usr/local/bin/node ./scripts/self-host-predeploy.js; then
+        exit 0
+    fi
+    echo "[affine] Migration attempt ${attempt}/15 failed (PostgreSQL may still be initializing); retrying in 2s..."
+    sleep 2
+done
+
+echo "[affine] ERROR: database migrations failed after 15 attempts"
+exit 1
