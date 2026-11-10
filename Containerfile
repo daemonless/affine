@@ -40,13 +40,21 @@ WORKDIR /src
 # --ignore-scripts skips postinstall (avoids Prisma engine download for unsupported FreeBSD target).
 # Remove the build script so yarn doesn't try to compile TypeScript during install.
 # We use the pre-built dist from the upstream Linux image instead.
+# Pin prisma and @prisma/client to 6.19.0 so the CLI RPC protocol matches FreeBSD's
+# prebuilt prisma-engines package (6.19.0).
 RUN node -e " \
     const fs = require('fs'); \
     const pkg = JSON.parse(fs.readFileSync('packages/backend/server/package.json')); \
     delete pkg.scripts.build; delete pkg.scripts.postinstall; \
-    fs.writeFileSync('packages/backend/server/package.json', JSON.stringify(pkg, null, 2));"
+    pkg.dependencies.prisma = '6.19.0'; pkg.dependencies['@prisma/client'] = '6.19.0'; \
+    fs.writeFileSync('packages/backend/server/package.json', JSON.stringify(pkg, null, 2)); \
+    const rootPkg = JSON.parse(fs.readFileSync('package.json')); \
+    rootPkg.resolutions = rootPkg.resolutions || {}; \
+    rootPkg.resolutions.prisma = '6.19.0'; rootPkg.resolutions['@prisma/client'] = '6.19.0'; \
+    fs.writeFileSync('package.json', JSON.stringify(rootPkg, null, 2));"
 
 RUN HUSKY=0 ELECTRON_SKIP_BINARY_DOWNLOAD=1 SENTRYCLI_SKIP_DOWNLOAD=1 \
+    YARN_ENABLE_IMMUTABLE_INSTALLS=false \
     yarn workspaces focus @affine/server --production
 
 # Move node_modules into the server package directory (matches official image layout)
@@ -168,9 +176,6 @@ RUN cd /tmp && mv root-package.json package.json && corepack install && \
 COPY --from=deps-builder /src/packages/backend/server/node_modules /app/node_modules
 COPY --from=deps-builder /version.txt /app/version
 
-# Copy pre-generated Prisma client JS from upstream (platform-agnostic, avoids prisma generate on FreeBSD)
-COPY --from=upstream /app/node_modules/.prisma /app/node_modules/.prisma
-
 # Install FreeBSD server-native NAPI module.
 # AFFiNE bundles the native binary into dist/ and loads it as ./server-native.x64.node.
 # Replace the Linux binary from the upstream image with our FreeBSD build.
@@ -182,19 +187,21 @@ COPY --from=native-builder /crc32.freebsd-x64.node \
 COPY --from=native-builder /argon2.freebsd-x64.node \
     /app/node_modules/@node-rs/argon2-freebsd-x64/argon2.freebsd-x64.node
 
-# Install FreeBSD Prisma query engine (replaces Linux binary downloaded during generate)
-RUN rm -f /app/node_modules/.prisma/client/libquery_engine-*.so.node \
-          /app/node_modules/prisma/libquery_engine-*.so.node 2>/dev/null || true
+# Install FreeBSD Prisma query engine + schema engine and generate matching client
+RUN mkdir -p /app/node_modules/.prisma/client /app/node_modules/@prisma/engines && \
+    rm -f /app/node_modules/.prisma/client/libquery_engine-*.so.node \
+          /app/node_modules/prisma/libquery_engine-*.so.node \
+          /app/node_modules/@prisma/engines/schema-engine-* \
+          /app/node_modules/@prisma/engines/libquery_engine-*.so.node 2>/dev/null || true
 COPY --from=native-builder /libquery_engine.so.node \
     /app/node_modules/.prisma/client/libquery_engine.so.node
-
-# Install FreeBSD Prisma schema engine (for predeploy migrations)
-RUN mkdir -p /app/node_modules/@prisma/engines && \
-    rm -f /app/node_modules/@prisma/engines/schema-engine-* \
-          /app/node_modules/@prisma/engines/libquery_engine-*.so.node 2>/dev/null || true
 COPY --from=native-builder /schema-engine \
     /app/node_modules/@prisma/engines/schema-engine
-RUN chmod 755 /app/node_modules/@prisma/engines/schema-engine
+RUN chmod 755 /app/node_modules/@prisma/engines/schema-engine && \
+    cd /app && \
+    PRISMA_QUERY_ENGINE_LIBRARY=/app/node_modules/.prisma/client/libquery_engine.so.node \
+    PRISMA_SCHEMA_ENGINE_BINARY=/app/node_modules/@prisma/engines/schema-engine \
+    /app/node_modules/.bin/prisma generate --schema=/app/schema.prisma
 
 # Ensure app files are readable by bsd user (UID 1000)
 RUN chmod -R o+rX /app
