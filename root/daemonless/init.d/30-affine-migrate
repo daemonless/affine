@@ -7,6 +7,20 @@ if [ -z "${DATABASE_URL}" ]; then
     exit 0
 fi
 
+# Wait for PostgreSQL to accept connections before running migrations
+DB_HOST=$(printf '%s' "${DATABASE_URL}" | sed -n 's|.*@\([^:/?]*\).*|\1|p')
+DB_PORT=$(printf '%s' "${DATABASE_URL}" | sed -n 's|.*@[^:/?]*:\([0-9]*\).*|\1|p')
+DB_HOST=${DB_HOST:-127.0.0.1}
+DB_PORT=${DB_PORT:-5432}
+
+echo "[affine] Waiting for PostgreSQL at ${DB_HOST}:${DB_PORT}..."
+for i in $(seq 1 60); do
+    if nc -z "${DB_HOST}" "${DB_PORT}" >/dev/null 2>&1; then
+        break
+    fi
+    sleep 1
+done
+
 echo "[affine] Running database migrations..."
 
 cd /app
@@ -14,4 +28,16 @@ cd /app
 if [ "$(id -u)" = 0 ]; then
     set -- dsu bsd
 fi
-exec "$@" /usr/local/bin/node ./scripts/self-host-predeploy.js
+
+# Retry predeploy up to 15 times (PostgreSQL starts a temporary instance during
+# initdb and briefly restarts before accepting connections on the target DB).
+for attempt in $(seq 1 15); do
+    if "$@" /usr/local/bin/node ./scripts/self-host-predeploy.js; then
+        exit 0
+    fi
+    echo "[affine] Migration attempt ${attempt}/15 failed (PostgreSQL may still be initializing); retrying in 2s..."
+    sleep 2
+done
+
+echo "[affine] ERROR: database migrations failed after 15 attempts"
+exit 1

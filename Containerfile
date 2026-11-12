@@ -40,34 +40,36 @@ WORKDIR /src
 # --ignore-scripts skips postinstall (avoids Prisma engine download for unsupported FreeBSD target).
 # Remove the build script so yarn doesn't try to compile TypeScript during install.
 # We use the pre-built dist from the upstream Linux image instead.
+# Pin prisma and @prisma/client to 6.19.0 so the CLI RPC protocol matches FreeBSD's
+# prebuilt prisma-engines package (6.19.0).
 RUN node -e " \
     const fs = require('fs'); \
     const pkg = JSON.parse(fs.readFileSync('packages/backend/server/package.json')); \
     delete pkg.scripts.build; delete pkg.scripts.postinstall; \
-    fs.writeFileSync('packages/backend/server/package.json', JSON.stringify(pkg, null, 2));"
+    pkg.dependencies.prisma = '6.19.0'; pkg.dependencies['@prisma/client'] = '6.19.0'; \
+    fs.writeFileSync('packages/backend/server/package.json', JSON.stringify(pkg, null, 2)); \
+    const rootPkg = JSON.parse(fs.readFileSync('package.json')); \
+    rootPkg.resolutions = rootPkg.resolutions || {}; \
+    rootPkg.resolutions.prisma = '6.19.0'; rootPkg.resolutions['@prisma/client'] = '6.19.0'; \
+    fs.writeFileSync('package.json', JSON.stringify(rootPkg, null, 2));"
 
 RUN HUSKY=0 ELECTRON_SKIP_BINARY_DOWNLOAD=1 SENTRYCLI_SKIP_DOWNLOAD=1 \
+    YARN_ENABLE_IMMUTABLE_INSTALLS=false \
     yarn workspaces focus @affine/server --production
-
-# Save Prisma engine version so native-builder can clone the matching prisma-engines commit.
-# The upstream image already has a pre-generated .prisma/client/ (pure JS, platform-agnostic)
-# that we copy directly in the runtime stage — no need to run prisma generate on FreeBSD.
-RUN node -e "console.log(require('./node_modules/@prisma/engines-version').enginesVersion)" \
-    > /engine-version.txt
 
 # Move node_modules into the server package directory (matches official image layout)
 RUN mv node_modules packages/backend/server/
 
 # Stage 3: Build FreeBSD native binaries
 #   - server-native: AFFiNE's Rust NAPI module (doc processing, AI, image handling, etc.)
-#   - prisma query-engine-node-api: Prisma's Node.js query engine for FreeBSD
-#   - prisma schema-engine-cli: used by predeploy script for database migrations
+#   - @node-rs/crc32 + @node-rs/argon2: built with global-dynamic TLS for FreeBSD dlopen
 FROM ghcr.io/daemonless/base-core:${BASE_VERSION} AS native-builder
 ARG NODE_VERSION
 
 RUN pkg update && \
     pkg install -y \
     node${NODE_VERSION} \
+    prisma-engines \
     FreeBSD-clang FreeBSD-clang-dev FreeBSD-clibs-dev FreeBSD-openssl-dev \
     FreeBSD-toolchain FreeBSD-libexecinfo-dev FreeBSD-runtime-dev \
     FreeBSD-utilities-dev FreeBSD-zlib-dev \
@@ -77,10 +79,6 @@ RUN pkg update && \
 # node22 pkg on FreeBSD installs as /usr/local/bin/node directly (no node22 symlink needed)
 
 COPY --from=deps-builder /version.txt /version.txt
-COPY --from=deps-builder /engine-version.txt /engine-version.txt
-
-# Patch script to fix metrics-0.23.0 Rust 1.94.0 E0521 lifetime error
-COPY patch-metrics.py /patch-metrics.py
 
 # Clone AFFiNE at the same version for the Cargo workspace
 RUN git clone --depth 1 --branch "$(cat /version.txt)" \
@@ -101,22 +99,10 @@ RUN CFLAGS="-ftls-model=global-dynamic" \
     cp target/release/libaffine_server_native.so /server-native.node && \
     rm -rf target ~/.cargo/registry ~/.cargo/git
 
-# Build Prisma engines for FreeBSD from the pinned commit matching the installed Prisma version.
-# metrics-0.23.0 (a transitive dep of prisma-engines) fails to compile on Rust >=1.94.0
-# due to E0521 (lifetime escape via raw pointer coercion of trait objects).
-# Fix: cargo fetch to populate the cache, then patch metrics-0.23.0 to add 'static
-# bound on set_local_recorder's type parameter before building.
-RUN ENGINE_VER=$(cat /engine-version.txt) && \
-    git clone https://github.com/prisma/prisma-engines.git /prisma-engines && \
-    cd /prisma-engines && \
-    git checkout "${ENGINE_VER}" && \
-    cargo fetch 2>&1 | tail -5 && \
-    python3 /patch-metrics.py && \
-    cargo build --release -p query-engine-node-api -p schema-engine-cli 2>&1 | tail -20 && \
-    cp target/release/libquery_engine.so /libquery_engine.so.node && \
-    cp target/release/schema-engine /schema-engine && \
-    chmod 755 /schema-engine && \
-    rm -rf /prisma-engines ~/.cargo/registry ~/.cargo/git
+# Copy prebuilt Prisma engines from the FreeBSD prisma-engines package
+RUN cp /usr/local/libexec/prisma-engines/libquery_engine.so /libquery_engine.so.node && \
+    cp /usr/local/libexec/prisma-engines/schema-engine /schema-engine && \
+    chmod 755 /schema-engine
 
 # Build @node-rs/crc32 and @node-rs/argon2 from source.
 # Pre-built FreeBSD binaries use initial-exec TLS which fails when dlopen'd by Node.js.
@@ -190,9 +176,6 @@ RUN cd /tmp && mv root-package.json package.json && corepack install && \
 COPY --from=deps-builder /src/packages/backend/server/node_modules /app/node_modules
 COPY --from=deps-builder /version.txt /app/version
 
-# Copy pre-generated Prisma client JS from upstream (platform-agnostic, avoids prisma generate on FreeBSD)
-COPY --from=upstream /app/node_modules/.prisma /app/node_modules/.prisma
-
 # Install FreeBSD server-native NAPI module.
 # AFFiNE bundles the native binary into dist/ and loads it as ./server-native.x64.node.
 # Replace the Linux binary from the upstream image with our FreeBSD build.
@@ -204,19 +187,24 @@ COPY --from=native-builder /crc32.freebsd-x64.node \
 COPY --from=native-builder /argon2.freebsd-x64.node \
     /app/node_modules/@node-rs/argon2-freebsd-x64/argon2.freebsd-x64.node
 
-# Install FreeBSD Prisma query engine (replaces Linux binary downloaded during generate)
-RUN rm -f /app/node_modules/.prisma/client/libquery_engine-*.so.node \
-          /app/node_modules/prisma/libquery_engine-*.so.node 2>/dev/null || true
+# Install FreeBSD Prisma query engine + schema engine and generate matching client.
+# The generator output is relative to the schema, which upstream keeps three levels
+# below the repo root; from /app/schema.prisma it would land in /node_modules.
+RUN mkdir -p /app/node_modules/.prisma/client /app/node_modules/@prisma/engines && \
+    rm -f /app/node_modules/.prisma/client/libquery_engine-*.so.node \
+          /app/node_modules/prisma/libquery_engine-*.so.node \
+          /app/node_modules/@prisma/engines/schema-engine-* \
+          /app/node_modules/@prisma/engines/libquery_engine-*.so.node 2>/dev/null || true
 COPY --from=native-builder /libquery_engine.so.node \
     /app/node_modules/.prisma/client/libquery_engine.so.node
-
-# Install FreeBSD Prisma schema engine (for predeploy migrations)
-RUN mkdir -p /app/node_modules/@prisma/engines && \
-    rm -f /app/node_modules/@prisma/engines/schema-engine-* \
-          /app/node_modules/@prisma/engines/libquery_engine-*.so.node 2>/dev/null || true
 COPY --from=native-builder /schema-engine \
     /app/node_modules/@prisma/engines/schema-engine
-RUN chmod 755 /app/node_modules/@prisma/engines/schema-engine
+RUN chmod 755 /app/node_modules/@prisma/engines/schema-engine && \
+    cd /app && \
+    sed -i '' 's|^\( *output *= *\)".*"|\1"./node_modules/.prisma/client"|' /app/schema.prisma && \
+    PRISMA_QUERY_ENGINE_LIBRARY=/app/node_modules/.prisma/client/libquery_engine.so.node \
+    PRISMA_SCHEMA_ENGINE_BINARY=/app/node_modules/@prisma/engines/schema-engine \
+    /app/node_modules/.bin/prisma generate --schema=/app/schema.prisma
 
 # Ensure app files are readable by bsd user (UID 1000)
 RUN chmod -R o+rX /app
