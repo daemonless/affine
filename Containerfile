@@ -187,7 +187,9 @@ COPY --from=native-builder /crc32.freebsd-x64.node \
 COPY --from=native-builder /argon2.freebsd-x64.node \
     /app/node_modules/@node-rs/argon2-freebsd-x64/argon2.freebsd-x64.node
 
-# Install FreeBSD Prisma query engine + schema engine and generate matching client
+# Install FreeBSD Prisma query engine + schema engine and generate matching client.
+# The generator output is relative to the schema, which upstream keeps three levels
+# below the repo root; from /app/schema.prisma it would land in /node_modules.
 RUN mkdir -p /app/node_modules/.prisma/client /app/node_modules/@prisma/engines && \
     rm -f /app/node_modules/.prisma/client/libquery_engine-*.so.node \
           /app/node_modules/prisma/libquery_engine-*.so.node \
@@ -199,6 +201,7 @@ COPY --from=native-builder /schema-engine \
     /app/node_modules/@prisma/engines/schema-engine
 RUN chmod 755 /app/node_modules/@prisma/engines/schema-engine && \
     cd /app && \
+    sed -i '' 's|^\( *output *= *\)".*"|\1"./node_modules/.prisma/client"|' /app/schema.prisma && \
     PRISMA_QUERY_ENGINE_LIBRARY=/app/node_modules/.prisma/client/libquery_engine.so.node \
     PRISMA_SCHEMA_ENGINE_BINARY=/app/node_modules/@prisma/engines/schema-engine \
     /app/node_modules/.bin/prisma generate --schema=/app/schema.prisma
