@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-04T12:31:29Z",
+  "generated": "2026-11-12T15:04:28Z",
   "image": "affine",
   "tags": {
     "latest": {
       "app_version": "v0.27.4",
       "arch": "amd64",
-      "generated": "2026-11-04T12:30:32Z",
+      "generated": "2026-11-12T15:03:02Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1037,37 +1037,37 @@
           {
             "name": "@prisma/client",
             "purl": "",
-            "version": "6.8.2"
+            "version": "6.19.0"
           },
           {
             "name": "@prisma/config",
             "purl": "",
-            "version": "6.8.2"
+            "version": "6.19.0"
           },
           {
             "name": "@prisma/debug",
             "purl": "",
-            "version": "6.8.2"
+            "version": "6.19.0"
           },
           {
             "name": "@prisma/engines",
             "purl": "",
-            "version": "6.8.2"
+            "version": "6.19.0"
           },
           {
             "name": "@prisma/engines-version",
             "purl": "",
-            "version": "6.8.0-43.2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
+            "version": "6.19.0-26.2ba551f319ab1df4bc874a89965d8b3641056773"
           },
           {
             "name": "@prisma/fetch-engine",
             "purl": "",
-            "version": "6.8.2"
+            "version": "6.19.0"
           },
           {
             "name": "@prisma/get-platform",
             "purl": "",
-            "version": "6.8.2"
+            "version": "6.19.0"
           },
           {
             "name": "@prisma/instrumentation",
@@ -1223,6 +1223,11 @@
             "name": "@socket.io/redis-adapter",
             "purl": "",
             "version": "8.3.0"
+          },
+          {
+            "name": "@standard-schema/spec",
+            "purl": "",
+            "version": "1.1.0"
           },
           {
             "name": "@tokenizer/inflate",
@@ -1405,6 +1410,11 @@
             "version": "3.1.2"
           },
           {
+            "name": "c12",
+            "purl": "",
+            "version": "3.1.0"
+          },
+          {
             "name": "cacache",
             "purl": "",
             "version": "19.0.1"
@@ -1423,6 +1433,11 @@
             "name": "chownr",
             "purl": "",
             "version": "3.0.0"
+          },
+          {
+            "name": "citty",
+            "purl": "",
+            "version": "0.1.6"
           },
           {
             "name": "cjs-module-lexer",
@@ -1478,6 +1493,16 @@
             "name": "concat-stream",
             "purl": "",
             "version": "2.0.0"
+          },
+          {
+            "name": "confbox",
+            "purl": "",
+            "version": "0.2.2"
+          },
+          {
+            "name": "consola",
+            "purl": "",
+            "version": "3.4.2"
           },
           {
             "name": "content-disposition",
@@ -1565,6 +1590,16 @@
             "version": "4.3.7"
           },
           {
+            "name": "deepmerge-ts",
+            "purl": "",
+            "version": "7.1.5"
+          },
+          {
+            "name": "defu",
+            "purl": "",
+            "version": "6.1.7"
+          },
+          {
             "name": "denque",
             "purl": "",
             "version": "2.1.0"
@@ -1573,6 +1608,11 @@
             "name": "depd",
             "purl": "",
             "version": "2.0.0"
+          },
+          {
+            "name": "destr",
+            "purl": "",
+            "version": "2.0.5"
           },
           {
             "name": "detect-libc",
@@ -1600,9 +1640,19 @@
             "version": "1.1.1"
           },
           {
+            "name": "effect",
+            "purl": "",
+            "version": "3.18.4"
+          },
+          {
             "name": "emoji-regex",
             "purl": "",
             "version": "10.4.0"
+          },
+          {
+            "name": "empathic",
+            "purl": "",
+            "version": "2.0.0"
           },
           {
             "name": "enabled",
@@ -1685,9 +1735,19 @@
             "version": "5.2.1"
           },
           {
+            "name": "exsolve",
+            "purl": "",
+            "version": "1.0.7"
+          },
+          {
             "name": "extend",
             "purl": "",
             "version": "3.0.2"
+          },
+          {
+            "name": "fast-check",
+            "purl": "",
+            "version": "3.23.2"
           },
           {
             "name": "fast-glob",
@@ -1813,6 +1873,11 @@
             "name": "get-stream",
             "purl": "",
             "version": "9.0.1"
+          },
+          {
+            "name": "giget",
+            "purl": "",
+            "version": "2.0.0"
           },
           {
             "name": "glob",
@@ -2002,7 +2067,7 @@
           {
             "name": "jiti",
             "purl": "",
-            "version": "2.4.2"
+            "version": "2.7.0"
           },
           {
             "name": "jose",
@@ -2275,6 +2340,11 @@
             "version": "2.7.0"
           },
           {
+            "name": "node-fetch-native",
+            "purl": "",
+            "version": "1.6.6"
+          },
+          {
             "name": "node-gyp",
             "purl": "",
             "version": "11.2.0"
@@ -2305,6 +2375,11 @@
             "version": "3.0.1"
           },
           {
+            "name": "nypm",
+            "purl": "",
+            "version": "0.6.0"
+          },
+          {
             "name": "object-assign",
             "purl": "",
             "version": "4.1.1"
@@ -2318,6 +2393,11 @@
             "name": "object-path",
             "purl": "",
             "version": "0.11.8"
+          },
+          {
+            "name": "ohash",
+            "purl": "",
+            "version": "2.0.11"
           },
           {
             "name": "on-finished",
@@ -2380,6 +2460,16 @@
             "version": "8.4.2"
           },
           {
+            "name": "pathe",
+            "purl": "",
+            "version": "2.0.3"
+          },
+          {
+            "name": "perfect-debounce",
+            "purl": "",
+            "version": "1.0.0"
+          },
+          {
             "name": "picomatch",
             "purl": "",
             "version": "2.3.2"
@@ -2390,14 +2480,19 @@
             "version": "5.2.0"
           },
           {
-            "name": "prisma",
+            "name": "pkg-types",
             "purl": "",
-            "version": "6.8.2"
+            "version": "2.3.0"
           },
           {
-            "name": "prisma-client-e380514be7454b0f9cd91bcc6c075f9ccb2ccec79ba61e3c6481c07d90500d04",
+            "name": "prisma",
             "purl": "",
-            "version": "6.8.2"
+            "version": "6.19.0"
+          },
+          {
+            "name": "prisma-client-71a9a4442dbe93301f613c650bf854d89daabdf18454e008cb021e6d61a569a1",
+            "purl": "",
+            "version": "6.19.0"
           },
           {
             "name": "proc-log",
@@ -2420,6 +2515,11 @@
             "version": "2.0.7"
           },
           {
+            "name": "pure-rand",
+            "purl": "",
+            "version": "6.1.0"
+          },
+          {
             "name": "qs",
             "purl": "",
             "version": "6.15.3"
@@ -2438,6 +2538,11 @@
             "name": "raw-body",
             "purl": "",
             "version": "3.0.2"
+          },
+          {
+            "name": "rc9",
+            "purl": "",
+            "version": "2.1.2"
           },
           {
             "name": "react",
@@ -2690,6 +2795,11 @@
             "version": "1.0.0"
           },
           {
+            "name": "tinyexec",
+            "purl": "",
+            "version": "0.3.2"
+          },
+          {
             "name": "tinyglobby",
             "purl": "",
             "version": "0.2.17"
@@ -2906,12 +3016,12 @@
         "freebsd": 56,
         "go": 0,
         "java": 0,
-        "node": 497,
+        "node": 519,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 553
+        "total": 575
       }
     }
   }
